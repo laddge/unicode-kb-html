@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@laddge_">
+    <meta property="og:url" content="https://api.laddge.tk/waku_icon">
+    <meta property="og:title" content="Unicode Keyboard">
+    <meta property="og:description" content="Type with unicode!">
+    <meta property="og:image" content="https://user-images.githubusercontent.com/67098414/139565588-a8085bb0-bb97-487c-84bd-78dfd7fc2420.png">
+    <style>
+        .blink {
+            -webkit-animation: blink .4s infinite alternate;
+            animation: blink .4s infinite alternate;
+        }
+        @-webkit-keyframes blink {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @keyframes blink {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        .unselectable {
+            -ms-user-select: none;
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+    <title>Unicode Keyboard</title>
+</head>
+<body>
+    <h1 class="text-center m-3 fw-bold">Unicode Keyboard</h1>
+    <hr>
+    <div class="row w-100">
+        <div class="mx-auto col-8 border border-primary rounded p-1 h5" style="height: 5em">
+            <span id="input"></span>
+            <span class="border border-dark bg-dark blink"></span>
+        </div>
+    </div>
+    <div class="bg-dark p-3 unselectable w-100" style="position: fixed; bottom: 0;">
+        <div class="row mx-auto">
+            <div class="col border border-secondary rounded text-light m-1 h1 pt-2" id="tmp"></div>
+            <div class="col-auto border border-light rounded text-light text-center m-1 py-3" onclick="commitCode()">↑</div>
+            <div class="col-auto border border-light rounded text-light text-center m-1 py-3" onclick="backSpace()">←</div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('0');">0</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('1');">1</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('2');">2</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('3');">3</div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('4');">4</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('5');">5</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('6');">6</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('7');">7</div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('8');">8</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('9');">9</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('A');">A</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('B');">B</div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('C');">C</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('D');">D</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('E');">E</div>
+            <div class="col border border-light rounded text-light text-center m-1 py-3" onclick="inputCode('F');">F</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tmpArea = document.getElementById('tmp');
+        var inputArea = document.getElementById('input');
+        function inputCode(s) {
+            tmpArea.innerText += s;
+        }
+        function commitCode() {
+            let code = parseInt(tmpArea.innerText, 16);
+            inputArea.innerText += String.fromCodePoint(code);
+            tmpArea.innerText = '';
+        }
+        function backSpace() {
+            if (tmpArea.innerText.length > 0) {
+                tmpArea.innerText = tmpArea.innerText.slice(0, -1);
+            } else {
+                inputArea.innerText = inputArea.innerText.slice(0, -1);
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
